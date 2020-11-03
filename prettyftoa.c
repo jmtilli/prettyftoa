@@ -75,9 +75,13 @@ static void ftoa_iter(char *buf, size_t bufsiz, int digits, double d,
 		abort();
 	}
 	sbufsiz = (ssize_t)bufsiz;
-	if (sbufsiz < 25 || bufsiz > SSIZE_MAX)
+	if (sbufsiz < 25)
 	{
 		abort();
+	}
+	if (bufsiz > SSIZE_MAX)
+	{
+		sbufsiz = SSIZE_MAX;
 	}
 	fmt = fmts[digits-1];
 	if (snprintf(buf, bufsiz, fmt, d) >= sbufsiz)
@@ -136,9 +140,13 @@ void pretty_ftoa(char *buf, size_t bufsiz, double d)
 		abort();
 	}
 	sbufsiz = (ssize_t)bufsiz;
-	if (sbufsiz < 25 || bufsiz > SSIZE_MAX)
+	if (sbufsiz < 25)
 	{
 		abort();
+	}
+	if (bufsiz > SSIZE_MAX)
+	{
+		sbufsiz = SSIZE_MAX;
 	}
 	if (atof(hibound) != d)
 	{
