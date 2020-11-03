@@ -4,7 +4,7 @@
 #include <string.h>
 #include <math.h>
 
-static inline double myintpow10(int exponent)
+static double myintpow10(int exponent)
 {
 	double a = 1.0;
 	double b = 10.0;
@@ -30,7 +30,7 @@ static inline double myintpow10(int exponent)
 	return a;
 }
 
-static inline void test_fix_exponent(const char *str, const char *tgt)
+static void test_fix_exponent(const char *str, const char *tgt)
 {
 	char buf[128];
 	if (snprintf(buf, sizeof(buf), "%s", str) >= (int)sizeof(buf))
