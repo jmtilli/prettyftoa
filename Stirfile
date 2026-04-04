@@ -14,8 +14,11 @@ $(OBJ_LIB) = @sufsuball($(SRC_LIB), ".c", ".o")
 $(OBJ) = @sufsuball($(SRC), ".c", ".o")
 $(DEP) = @sufsuball($(SRC), ".c", ".d")
 $(PROG) = @sufsuball($(SRC_PROG), ".c", "")
+$(LDFLAGS_DYN)=[]
+$(LN)="ln"
+$(RM)="rm"
 
-@phonyrule: 'all': 'libprettyftoa.a' $(PROG)
+@phonyrule: 'all': 'libprettyftoa.a' 'libprettyftoa.so.1' 'libprettyftoa.so' $(PROG)
 
 @patrule: $(PROG): '%': '%.o' 'libprettyftoa.a'
 @	[$(CC), @$(CFLAGS), "-o", $@, $<, 'libprettyftoa.a']
@@ -29,6 +32,13 @@ $(PROG) = @sufsuball($(SRC_PROG), ".c", "")
 'libprettyftoa.a': $(OBJ_LIB)
 @	["rm", "-f", $@]
 @	["ar", "rvs", $@, @@suffilter($^, ".o")]
+
+'libprettyftoa.so.1': 'libprettyftoa.a'
+@	[$(CC), @$(CFLAGS), "-shared", "-o", $@, "-Wl,--whole-archive", @@suffilter($^, ".a"), "-Wl,--no-whole-archive", @$(LDFLAGS_DYN), "-lc"]
+
+'libprettyftoa.so': 'libprettyftoa.so.1'
+@	[$(RM), "-f", $@]
+@	[$(LN), "-s", $<, $@]
 
 @phonyrule: 'unit': 'test'
 @	["./test"]
