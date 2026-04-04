@@ -48,7 +48,7 @@ void pretty_ftoa_fix_exponent(char *buf)
 			skip--;
 		}
 	}
-	memcpy(&eloc[1], &eloc[skip+1], strlen(&eloc[skip+1]) + 1);
+	memmove(&eloc[1], &eloc[skip+1], strlen(&eloc[skip+1]) + 1);
 }
 
 static void ftoa_iter(char *buf, size_t bufsiz, int digits, double d,
