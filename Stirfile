@@ -21,7 +21,7 @@ $(RM)="rm"
 @phonyrule: 'all': 'libprettyftoa.a' 'libprettyftoa.so.1' 'libprettyftoa.so' $(PROG)
 
 @patrule: $(PROG): '%': '%.o' 'libprettyftoa.a'
-@	[$(CC), @$(CFLAGS), "-o", $@, $<, 'libprettyftoa.a']
+@	[$(CC), @$(CFLAGS), "-o", $@, $<, 'libprettyftoa.a', '-lm']
 
 @patrule: $(OBJ): '%.o': '%.c' '%.d'
 @	[$(CC), @$(CFLAGS), "-c", "-o", $@, $<]
