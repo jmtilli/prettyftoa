@@ -4,6 +4,7 @@
 #include <stddef.h>
 #include <limits.h>
 #include <string.h>
+#include <sys/types.h>
 
 void pretty_ftoa_fix_exponent(char *buf)
 {
