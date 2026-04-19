@@ -3,6 +3,8 @@
 
 #include <stddef.h>
 
+#define PRETTY_FTOA_BUFSIZ 25
+
 void pretty_ftoa_fix_exponent(char *buf);
 
 void pretty_ftoa(char *buf, size_t bufsiz, double d);

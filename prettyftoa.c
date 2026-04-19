@@ -67,7 +67,7 @@ static void ftoa_iter(char *buf, size_t bufsiz, int digits, double d,
 	// 18 characters mantissa with period
 	// 5 characters 'e-123'
 	// 1 character '\0'
-	if (bufsiz < 25)
+	if (bufsiz < PRETTY_FTOA_BUFSIZ)
 	{
 		abort();
 	}
@@ -76,7 +76,7 @@ static void ftoa_iter(char *buf, size_t bufsiz, int digits, double d,
 		abort();
 	}
 	sbufsiz = (ssize_t)bufsiz;
-	if (sbufsiz < 25)
+	if (sbufsiz < PRETTY_FTOA_BUFSIZ)
 	{
 		abort();
 	}
@@ -122,13 +122,13 @@ static void ftoa_iter(char *buf, size_t bufsiz, int digits, double d,
 
 void pretty_ftoa(char *buf, size_t bufsiz, double d)
 {
-	char hibound[25];
+	char hibound[PRETTY_FTOA_BUFSIZ];
 	size_t hilen;
 	int hi_is_expo;
 	ssize_t sbufsiz;
-	char hinoexpo[25];
-	char noexpo[25];
-	char curbuf[25];
+	char hinoexpo[PRETTY_FTOA_BUFSIZ];
+	char noexpo[PRETTY_FTOA_BUFSIZ];
+	char curbuf[PRETTY_FTOA_BUFSIZ];
 	size_t len;
 	int is_expo;
 	int cur;
@@ -136,12 +136,12 @@ void pretty_ftoa(char *buf, size_t bufsiz, double d)
 
 	hi = 17;
 	ftoa_iter(hibound, sizeof(hibound), hi, d, &hilen, &hi_is_expo);
-	if (bufsiz < 25)
+	if (bufsiz < PRETTY_FTOA_BUFSIZ)
 	{
 		abort();
 	}
 	sbufsiz = (ssize_t)bufsiz;
-	if (sbufsiz < 25)
+	if (sbufsiz < PRETTY_FTOA_BUFSIZ)
 	{
 		abort();
 	}
