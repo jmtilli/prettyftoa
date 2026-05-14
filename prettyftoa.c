@@ -96,7 +96,7 @@ static void ftoa_iter(char *buf, size_t bufsiz, int digits, double d,
 		pretty_ftoa_fix_exponent(buf);
 		len = strlen(buf);
 	}
-	if (!is_expo && strchr(buf, '.') == NULL)
+	if (!is_expo && strchr(buf, '.') == NULL && !strstr(buf, "inf") && !strstr(buf, "nan") && !strstr(buf, "INF") && !strstr(buf, "NAN"))
 	{
 		if (len >= bufsiz - 2)
 		{
