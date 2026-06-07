@@ -7,6 +7,8 @@
 
 void pretty_ftoa_fix_exponent(char *buf);
 
+void pretty_ftoa_fuzz(char *buf, size_t bufsiz, double d, unsigned exponent_fuzz);
+
 void pretty_ftoa(char *buf, size_t bufsiz, double d);
 
 #endif

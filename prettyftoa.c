@@ -120,7 +120,7 @@ static void ftoa_iter(char *buf, size_t bufsiz, int digits, double d,
  * - pick the one without exponent
  */
 
-void pretty_ftoa(char *buf, size_t bufsiz, double d)
+void pretty_ftoa_fuzz(char *buf, size_t bufsiz, double d, unsigned exponent_fuzz)
 {
 	char hibound[PRETTY_FTOA_BUFSIZ];
 	size_t hilen;
@@ -257,7 +257,8 @@ void pretty_ftoa(char *buf, size_t bufsiz, double d)
 	// hibound may or may not have an exponent.
 	// hinoexpo does not have an exponent.
 	// Pick the shorter one. If equal pick the one with no exponent.
-	if (!hi_is_expo && strlen(hinoexpo) <= strlen(hibound))
+	// Allow optional fuzz to make 1000.0 preferable to 1e+03
+	if (!hi_is_expo && strlen(hinoexpo) <= strlen(hibound) + exponent_fuzz)
 	{
 		if (snprintf(buf, bufsiz, "%s", hinoexpo) >= sbufsiz)
 		{
@@ -269,4 +270,8 @@ void pretty_ftoa(char *buf, size_t bufsiz, double d)
 	{
 		abort();
 	}
+}
+void pretty_ftoa(char *buf, size_t bufsiz, double d)
+{
+	pretty_ftoa_fuzz(buf, bufsiz, d, 0);
 }
