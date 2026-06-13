@@ -3,8 +3,6 @@
 
 @fileinclude @ignore "opts.smk"
 
-$CC ?= "cc"
-
 $(CC) ?= @nil
 @if(@type($(CC)) == @type(""))
   $(CC) = [$(CC)]
